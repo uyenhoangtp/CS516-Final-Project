@@ -7,22 +7,19 @@ phases:
     commands:
       - echo Installing dependencies for Vite React project...
       - npm ci
-      
   pre_build:
     commands:
       - echo Pre-build phase started on `date`
       - echo Checking Node.js and npm versions
       - node --version
       - npm --version
-      
   build:
     commands:
       - echo Build started on `date`
       - echo Building Vite React project...
       - npm run build
-      - echo Build output directory contents:
+      - echo Build output directory contents
       - ls -la ./dist
-      
   post_build:
     commands:
       - echo Build completed on `date`
@@ -31,12 +28,12 @@ phases:
       - echo Invalidating CloudFront...
       - aws cloudfront create-invalidation --distribution-id E3GX73LHVMNF2Y --paths "/*"
       - echo Deployment completed successfully!
-      
+
 artifacts:
   files:
     - '**/*'
   base-directory: 'dist'
-  
+
 cache:
   paths:
     - 'node_modules/**/*'
