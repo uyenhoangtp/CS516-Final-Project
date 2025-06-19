@@ -21,13 +21,25 @@ phases:
       - echo Build output directory contents
       - ls -la ./dist
   post_build:
+    # commands:
+    #   - echo Build completed on `date`
+    #   - echo Uploading to S3...
+    #   - aws s3 sync ./dist s3://cs516-group7-web-hosting-1 --delete
+    #   - echo Invalidating CloudFront...
+    #   - aws cloudfront create-invalidation --distribution-id E1Y2FF5CTMIOKD --paths "/*"
+    #   - echo Deployment completed successfully!
+
+    #   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Checking if dist directory exists...
+      - if [ ! -d "./dist" ]; then echo "dist directory not found. Build failed."; exit 1; fi
       - echo Uploading to S3...
-      # - aws s3 sync ./dist s3://cs516-group7-web-hosting-1 --delete
+      - aws s3 sync ./dist s3://cs516-group7-web-hosting-1 --delete
       - echo Invalidating CloudFront...
       - aws cloudfront create-invalidation --distribution-id E1Y2FF5CTMIOKD --paths "/*"
       - echo Deployment completed successfully!
+
 
 artifacts:
   files:
