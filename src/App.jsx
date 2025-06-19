@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Game } from './pages/game/Game';
 import { Login } from './pages/login/Login';
 import { useEffect, useState } from 'react';
-import { Scores } from './pages/scores';
+import { Scores } from './pages/Scores';
 import { NavBar } from './components/NavBar';
 
 
